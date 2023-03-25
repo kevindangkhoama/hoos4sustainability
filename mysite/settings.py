@@ -113,5 +113,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+LOGIN_REDIRECT_URL = 'blog:login'
+LOGIN_URL = 'blog:login'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_PORT_USER = '@gmail.com'
+EMAIL_HOST_PASSWORD = '#'
+EMAIL_USE_TLS = True
 
 ACCOUNT_LOGOUT_REDIRECT_URL = "/blog"
