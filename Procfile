@@ -1,2 +1,2 @@
-release: python manage.py migrate
-web: gunicorn blog.wsgi
+release:python3 manage.py migrate
+web:gunicorn blog.wsgi
