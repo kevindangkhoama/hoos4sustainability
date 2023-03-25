@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('textbook/', include('textbookexchange.urls')),
+    path('sustainability/', include('textbookexchange.urls')),
     path('admin/', admin.site.urls),
 ]
