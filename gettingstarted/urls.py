@@ -42,7 +42,7 @@ urlpatterns = [
          name='login'),
     path('ship/', auth_views.LoginView.as_view(template_name='hello/ship.html'), name='ship'),
     path('points/', auth_views.LoginView.as_view(template_name='hello/points.html'), name='points'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='hello/hoos.html')),
+    path('logout/', auth_views.LogoutView.as_view(template_name='hello/hoos.html'), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('', auth_views.LoginView.as_view(template_name='hello/hoos.html'), name='home')
     # path('', include('django.contrib.auth.urls'))
