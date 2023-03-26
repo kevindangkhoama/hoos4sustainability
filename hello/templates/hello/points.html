@@ -287,7 +287,7 @@ border-radius: 10px;
 					}
 					let totalPoints = parseInt(document.getElementById("total-points").textContent.match(/\d+/)[0]);
                     let pointcalc = parseFloat(document.getElementById("pointcalc").textContent);
-                    let newtotal = totalPoints + pointcalc;
+                    let newtotal = currentpt + pointcalc;
                     document.getElementById("newtotal").textContent = newtotal;
                     // create a string with the new total value
                     var newTotalString = "New Total: " + newtotal;
