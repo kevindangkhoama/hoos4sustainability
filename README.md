@@ -27,7 +27,7 @@ Carpooling, Ridesharing, Hitchhiking
 </details>
 <br>
 
-The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached every 1,000 points and leveling system. Active forms of transportation have a 10x multiplier, passive forms of transportations have a 5x multiplier, and shared forms of transportation have a 2x multiplier.
+The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached every 1,000 points and the web application has an implemented leveling system. Active forms of transportation have a 10x multiplier, passive forms of transportations have a 5x multiplier, and shared forms of transportation have a 2x multiplier.
 
 ## Technologies Used:
 - Heroku
