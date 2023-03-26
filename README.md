@@ -11,13 +11,13 @@ Access our submission [here](https://hoos4sustainability.herokuapp.com) or [here
 <details>
 <summary>active</summary>  
   
-- Biking, Walking, Running
+Biking, Walking, Running
 </details>
 
 <details>
 <summary>public</summary>  
   
-- Bus, Train, Metro
+Bus, Train, Metro
 </details>
 
 <details>
