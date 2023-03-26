@@ -218,10 +218,23 @@ i {
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{% url 'hoos' %}">Hoos4Sustainability</a>
                 </div>
-                
+                {% if user.is_authenticated %}
+
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'points' %}">{{user.username}}'s Journey</a></li>
                 </ul>
+
+
+                
+
+                {% else %}
+<ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'points' %}">Your Journey</a></li>
+                </ul>
+                
+                {% endif %}
+                
+                
            
                 <!-- <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'ship' %}">Ship Tracker</a></li>
