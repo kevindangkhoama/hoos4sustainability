@@ -1,4 +1,93 @@
-{% extends 'hello/base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ship Animation</title>
+    <style>
+      body {
+  background-image: url("background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+      }
+      .ship {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        width: 300px;
+        height: auto;
+        transition: left 1s ease;
+      }
+      .treasure {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+        width: 200px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="ship.png" alt="Ship" class="ship">
+    <img src="treasure.png" alt="Treasure" class="treasure">
+    <input type="number" min="0" max="100" placeholder="Enter miles">
+    <script>
+      const input = document.querySelector('input');
+      const ship = document.querySelector('.ship');
+      let previousMiles = 0;
+      const maxWidth = window.innerWidth - ship.offsetWidth;
 
-{%endblock%}
+      let previousDistance = 0;
+
+      function moveShip() {
+        const miles = parseInt(input.value);
+        const percent = (miles / 100) * 100;
+        let moveDistance = percent / 100 * maxWidth;
+        moveDistance %= maxWidth;
+        if (moveDistance < 0) {
+          moveDistance += maxWidth;
+        }
+        const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
+        let duration = distanceDiff / maxWidth * 5;
+        if (moveDistance < previousDistance) {
+          duration *= 2; // double duration for wrap-around effect
+        }
+        ship.style.transitionDuration = `${duration}s`;
+        ship.style.left = `${moveDistance}px`;
+        previousDistance = moveDistance;
+        if (moveDistance === 0) {
+          previousDistance = maxWidth;
+        }
+      
+        if (miles%100 == 0) {
+          alert("Treasure reached!");
+        }
+      }
+
+      input.addEventListener('input', () => {
+        const miles = parseInt(input.value);
+        let moveDistance;
+        if (miles > previousMiles) {
+          const percent = ((miles - previousMiles) / 100) * 100;
+          moveDistance = (percent / 100) * maxWidth;
+        } else {
+          moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
+        }
+        moveDistance %= maxWidth;
+        if (moveDistance < 0) {
+          moveDistance += maxWidth;
+        }
+        const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
+        const duration = distanceDiff / maxWidth * 5;
+        ship.style.transitionDuration = `${duration}s`;
+        previousMiles = miles;
+        moveShip();
+      });
+
+      window.onload = () => {
+        moveShip();
+      };
+    </script>
+  </body>
+</html>
