@@ -102,7 +102,6 @@ table, th, td {
     <br>
 <p style="text-align:center;">New Total Points: <span id="newtotal"></span></p>
 <br>
-<u><b><p style="text-align:center;">LEVEL: <span id="level"></span></p></b></u>
 
     </th>
   </tr>
@@ -285,7 +284,7 @@ border-radius: 10px;
 						document.getElementById("pointcalc").innerHTML = "";
 						document.getElementById("distance").innerHTML = "";
 					}
-					let totalPoints = parseInt(document.getElementById("total-points").textContent.match(/\d+/)[0]);
+					let totalPoints = parseInt(document.getElementById("currentpt").textContent.match(/\d+/)[0]);
                     let pointcalc = parseFloat(document.getElementById("pointcalc").textContent);
                     let newtotal = currentpt + pointcalc;
                     document.getElementById("newtotal").textContent = newtotal;
