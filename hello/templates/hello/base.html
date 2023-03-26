@@ -49,9 +49,33 @@ i {
     margin-right: 10px;
 }
 /*----------bootstrap-navbar-css------------*/
+/*@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+i {
+    margin-right: 10px;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+i {
+    margin-right: 10px;
+}
+/*----------bootstrap-navbar-css------------*/
 .navbar-logo{
     padding: 15px;
-    color: #fff;
+    color: #e3f2fd;
 }
 .navbar-mainbg{
     background-color: #e3f2fd;
@@ -73,7 +97,7 @@ i {
     float: left;
 }
 #navbarSupportedContent ul li a{
-/*    color: rgba(255,255,255,0.5);*/
+    color: rgba(255,255,255,0.5);
     text-decoration: none;
     font-size: 15px;
     display: block;
@@ -111,7 +135,7 @@ i {
     left: 0px;
     transition-duration:0.6s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background-color: #fff;
+    background-color: #e3f2fd;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-top: 10px;
@@ -121,7 +145,7 @@ i {
     position: absolute;
     width: 25px;
     height: 25px;
-    background-color: #fff;
+    background-color: #e3f2fd;
     bottom: 10px;
 }
 .hori-selector .right{
@@ -204,14 +228,122 @@ i {
     }
 }
 
+@media(min-width: 992px){
+    .navbar-expand-custom {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    .navbar-expand-custom .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+    .navbar-expand-custom .navbar-toggler {
+        display: none;
+    }
+    .navbar-expand-custom .navbar-collapse {
+        display: -ms-flexbox!important;
+        display: flex!important;
+        -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    }
+}
+
+
+@media (max-width: 991px){
+    #navbarSupportedContent ul li a{
+        padding: 12px 30px;
+    }
+    .hori-selector{
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 0;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+    .hori-selector .left,
+    .hori-selector .right{
+        right: 10px;
+    }
+    .hori-selector .left{
+        top: -25px;
+        left: auto;
+    }
+    .hori-selector .right{
+        bottom: -25px;
+    }
+    .hori-selector .left:before{
+        left: -25px;
+        top: -25px;
+    }
+    .hori-selector .right:before{
+        bottom: -25px;
+        left: -25px;
+    }
+}
+
 
  </style>
 </head>
 
+<body><div id="wrapper">
+
+    <!-- <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                </li>
+            </ul>
+        </div>
+    </nav> -->
+
+<!-- <div id="navbar-animmenu" style="background-color: #e3f2fd;">
+        <ul class="show-dropdown main-navbar" >
+            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+            <li>
+                <a href="{% url 'hoos'%}"><i class="fas fa-tachometer-alt"></i>Hoos4Sustainability</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);"><i class="far fa-address-book"></i>Journey</a>
+            </li>
+            <li>
+               <div class="right"> <a href="{% url 'register'%}"><i class="far fa-clone"></i>Register</a></div>
+            </li>
+            <li>
+                <div class="right"><a href="{% url 'login'%}"><i class="far fa-calendar-alt"></i>Login</a></div>
+            </li>
+            
+            
+            
+        </ul>
+    </div>
+ -->
 
 
-<body>
-    <div id="wrapper">
+
+    
         <!-- navbar -->
         <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
             <div class="container">
@@ -290,7 +422,9 @@ i {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l" > </script>
 
-    <script> // ---------Responsive-navbar-active-animation-----------
+    <script> 
+
+// ---------Responsive-navbar-active-animation-----------
 function test(){
     var tabsNewAnim = $('#navbarSupportedContent');
     var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
@@ -347,5 +481,27 @@ jQuery(document).ready(function($){
     // Add active class to target link
     target.parent().addClass('active');
 });
+
+
+
+
+// Add active class on another page linked
+// ==========================================
+// $(window).on('load',function () {
+//     var current = location.pathname;
+//     console.log(current);
+//     $('#navbarSupportedContent ul li a').each(function(){
+//         var $this = $(this);
+//         // if the current path is like this link, make it active
+//         if($this.attr('href').indexOf(current) !== -1){
+//             $this.parent().addClass('active');
+//             $this.parents('.menu-submenu').addClass('show-dropdown');
+//             $this.parents('.menu-submenu').parent().addClass('active');
+//         }else{
+//             $this.parent().removeClass('active');
+//         }
+//     })
+// });
+
 </script>
 
