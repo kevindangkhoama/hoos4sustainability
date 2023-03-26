@@ -38,25 +38,24 @@ border-radius: 10px;
         <div class="navbar-header">
             <a class="navbar-brand" href="{% url 'hoos' %}">Hoos4Sustainability</a>
         </div>
-        {% if not user.is_authenticated %}
+        
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'points' %}">Record Journey!</a></li>
                 </ul>
-            {% endif %}
-            {% if not user.is_authenticated %}
+   
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'ship' %}">Ship Tracker</a></li>
                 </ul>
-            {% endif %}
+       
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <!-- show registration only if user is not yet authenticated -->
             {% if not user.is_authenticated %}
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'register' %}">Registration</a></li>
                 </ul>
-            {% endif %}
-            <!-- show login only if user is not yet authenticated -->
-            {% if not user.is_authenticated %}
+     {% endif %}
+            <!-- show login only if user is not yet authenticated  -->
+            {% if not user.is_authenticated %} 
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'login' %}">Login</a></li>
                 </ul>
