@@ -106,7 +106,9 @@ table, th, td {
     <p style="text-align:center;">Points Earned: <span id="pointcalc"></span></p>
     <br>
     <center><button type="button" onclick="addNumbers()">Total Points</button> </center><br>
-<p style="text-align:center;">New Total Points: <span id="newtotal"></span></p>
+<p style="text-align:center;">New Total Points: <span id="newtotal"></span></p> <br>
+
+<p style="text-align:center;"><b><u>LEVEL: <span id="level"></span></u></b></p>
 <br>
 
     </th>
@@ -323,6 +325,14 @@ function addNumbers(points) {
 
         // Display the result
         document.getElementById("newtotal").innerHTML = sum;
+
+        var level = Math.floor(sum / 100) + 1;
+        document.getElementById("level").innerHTML = level;
+
+
+
+
+
 
 
         const input = document.querySelector('currentpt');
