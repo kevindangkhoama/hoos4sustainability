@@ -212,25 +212,25 @@ border-radius: 10px;
           }
         }
 
-        // input.addEventListener('input', () => {
-        //   const miles = parseInt(input.value);
-        //   let moveDistance;
-        //   if (miles > previousMiles) {
-        //     const percent = ((miles - previousMiles) / 100) * 100;
-        //     moveDistance = (percent / 100) * maxWidth;
-        //   } else {
-        //     moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
-        //   }
-        //   moveDistance %= maxWidth;
-        //   if (moveDistance < 0) {
-        //     moveDistance += maxWidth;
-        //   }
-        //   const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
-        //   const duration = distanceDiff / maxWidth * 5;
-        //   ship.style.transitionDuration = `${duration}s`;
-        //   previousMiles = miles;
-        //   moveShip();
-        // });
+        input.addEventListener('input', () => {
+          const miles = parseInt(input.value);
+          let moveDistance;
+          if (miles > previousMiles) {
+            const percent = ((miles - previousMiles) / 100) * 100;
+            moveDistance = (percent / 100) * maxWidth;
+          } else {
+            moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
+          }
+          moveDistance %= maxWidth;
+          if (moveDistance < 0) {
+            moveDistance += maxWidth;
+          }
+          const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
+          const duration = distanceDiff / maxWidth * 5;
+          ship.style.transitionDuration = `${duration}s`;
+          previousMiles = miles;
+          moveShip();
+        });
 
         window.onload = () => {
           moveShip();
@@ -286,7 +286,7 @@ border-radius: 10px;
 					}
 					let totalPoints = parseInt(document.getElementById("currentpt").textContent.match(/\d+/)[0]);
                     let pointcalc = parseFloat(document.getElementById("pointcalc").textContent);
-                    let newtotal = currentpt + pointcalc;
+                    let newtotal = totalPoints + pointcalc;
                     document.getElementById("newtotal").textContent = newtotal;
                     // create a string with the new total value
                     var newTotalString = "New Total: " + newtotal;
