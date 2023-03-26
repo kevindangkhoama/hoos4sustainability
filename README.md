@@ -11,33 +11,27 @@ Access our submission [here](https://hoos4sustainability.herokuapp.com/hoos/). T
 <details>
 <summary>active</summary>  
   
-- Biking
-- Walking
-- Skating
+- Biking, Walking, Running
 </details>
 
 <details>
 <summary>public</summary>  
   
-- Bus
-- Train
-- Metro
+- Bus, Train, Metro
 </details>
 
 <details>
 <summary>shared</summary>  
   
-- Car Pool
-- Ride Share
-- Hitch Hike
+Car Pool, Ride Share, Hitch Hike
 </details>
 <br>
 
-The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached once 100 points has been reached with a milestone achieved after every 100 points.
+The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached every 1,000 points. Active forms of transportation have a 10x multiplier, passive forms of transportations have a 5x multiplier, and shared forms of transportation have a 2x multiplier.
 
 ## Technologies Used:
 - Heroku
 - Google Maps API
--  HTML/CSS
--  JavaScript
--  Python (Django Framework)
+- HTML/CSS
+- JavaScript
+- Python (Django Framework)
