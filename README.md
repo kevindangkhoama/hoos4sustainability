@@ -33,7 +33,7 @@ Access our submission [here](https://hoos4sustainability.herokuapp.com/hoos/). T
 </details>
 <br>
 
-The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached once 1,000 miles has been reached with a milestone achieved after every 50 miles.
+The distance traveled is calculated through Google Maps API. Once the distance is calculated, the boat will move accordingly. The treasure will be reached once 100 points has been reached with a milestone achieved after every 100 points.
 
 ## Technologies Used:
 - Heroku
