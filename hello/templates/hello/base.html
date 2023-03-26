@@ -220,12 +220,12 @@ i {
                 </div>
                 
                 <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'points' %}">Record Journey!</a></li>
+                    <li class="active"><a href="{% url 'points' %}">{{user.username}}'s Journey</a></li>
                 </ul>
            
-                <ul class="nav navbar-nav ">
+                <!-- <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'ship' %}">Ship Tracker</a></li>
-                </ul>
+                </ul> -->
            
                 <div id="navbar" class="collapse navbar-collapse navbar-right">
                     <!-- show registration only if user is not yet authenticated -->
@@ -257,9 +257,9 @@ i {
                     <!-- Logged user info -->
                     {% if user.is_authenticated %}
                         <p class="text-center">
-                            | Logged user: {{ user.username }}
+                            Logged user: {{ user.username }}
                             | Email: {{ user.email }}
-                            | Admin:{{ user.is_superuser }}
+                            <!-- | Admin:{{ user.is_superuser }} -->
                             | <a href="{% url 'logout' %}">Sign Out</a>
                         </p>
                     {% endif %}
