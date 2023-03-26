@@ -109,7 +109,8 @@ table, th, td {
 <p style="text-align:center;">New Total Points: <span id="newtotal"></span></p> <br>
 
 <p style="text-align:center;"><b><u>LEVEL: <span id="level"></span></u></b></p>
-<br>
+<!-- <br>
+<center><button type="button" onclick="Goo()">Set Sail!</button> </center> -->
 
     </th>
   </tr>
@@ -335,37 +336,39 @@ function addNumbers(points) {
 
 
 
-        const input = sum;
-        const ship = document.querySelector('.ship');
-        let previousMiles = 0;
-        const maxWidth = window.innerWidth - ship.offsetWidth;
 
-        let previousDistance = 0;
-        const miles = parseInt(sum);
+        var numberOfPixels = parseInt(document.getElementById('newtotal').innerText);
 
-        input.addEventListener('input', () => {
-          const miles = parseInt(input.value);
-          let moveDistance;
-          if (miles > previousMiles) {
-            const percent = ((miles - previousMiles) / 100) * 100;
-            moveDistance = (percent / 100) * maxWidth;
-          } else {
-            moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
-          }
-          moveDistance %= maxWidth;
-          if (moveDistance < 0) {
-            moveDistance += maxWidth;
-          }
-          const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
-          const duration = distanceDiff / maxWidth * 5;
-          ship.style.transitionDuration = `${duration}s`;
-          previousMiles = miles;
-          moveShip();
-        });
+        const maxWidth = 1920;
 
-        window.onload = () => {
-          moveShip();
-        };
+      var img = document.querySelector(".ship"); // replace "myImage" with the ID of your image element
+  var currentLeft = parseInt(img.style.left) || 0; // get the current left position of the image (or default to 0)
+  var newLeft = currentLeft + numberOfPixels; // calculate the new left position based on the input
+  newLeft = newLeft % 1000;
+
+  img.style.left = newLeft + "px";
+
+
+
+        //   if (level > 0 && level%1 == 0) {
+        //     alert("Treasure reached!");
+        //   }
+        // }
+        
+
+
+        
+          // if (miles > previousMiles) {
+          //   const percent = ((miles - previousMiles) / 100) * 100;
+          //   moveDistance = (percent / 100) * maxWidth;
+          // } else {
+          //   moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
+          // }
+          // moveDistance %= maxWidth;
+          // if (moveDistance < 0) {
+          //   moveDistance += maxWidth;
+          // }
+          
 
 
         // file.write('newtotal');
@@ -385,9 +388,13 @@ function addNumbers(points) {
         //     alert("Treasure reached!");
         //   }
         // return;
-      }
 
-		</script>
+
+      }
+function Goo() {
+  
+      }
+    </script>
 	</body>
 </html>
 
