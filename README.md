@@ -1,4 +1,3 @@
-# Python: Getting Started
 # Hoos4Sustainability
 Submission for HooHacks23's Sustainability by UVA Sustainable IT Prize Track
 
