@@ -44,5 +44,6 @@ urlpatterns = [
     path('points/', auth_views.LoginView.as_view(template_name='hello/points.html'), name='points'),
     path('logout/', auth_views.LogoutView.as_view(template_name='hello/hoos.html')),
     path('register/', RegisterView.as_view(), name='register'),
-    path('', include('django.contrib.auth.urls'))
+    path('', auth_views.LoginView.as_view(template_name='hello/hoos.html'), name='home')
+    # path('', include('django.contrib.auth.urls'))
 ]
