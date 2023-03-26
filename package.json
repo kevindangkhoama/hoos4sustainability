@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kevindangkhoama/hoos4sustainability/issues"
   },
-  "homepage": "https://github.com/kevindangkhoama/hoos4sustainability#readme"
+  "homepage": "https://github.com/kevindangkhoama/hoos4sustainability#readme",
+  "dependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
