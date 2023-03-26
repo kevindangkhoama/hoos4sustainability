@@ -3,79 +3,83 @@
 
 <!DOCTYPE html>
 <html>
-<body>
-	<h1>Record Journey</h1>
-	<form>
-		<label for="transportation">Select Transport:</label>
-		<select id="transportation" name="transportation">
-			<option value="" disabled selected>Select Transport</option>
-			<option value="public">Metro, Bus, Train</option>
-			<option value="active">Walking, Running, Biking</option>
-			<option value="shared">Ridesharing, Carpooling, Hitchhiking</option>
-		</select><br><br>
+	<head>
+		<meta charset="UTF-8">
+		<title>Record Journey</title>
+	</head>
+	<body style="text-align:center;">
+		<h1>Record Journey</h1>
+		<form>
+			<label for="transportation">Select Transport:</label>
+			<select id="transportation" name="transportation">
+				<option value="" disabled selected>Select Transport</option>
+				<option value="public">Metro, Bus, Train</option>
+				<option value="active">Walking, Running, Biking</option>
+				<option value="shared">Ridesharing, Carpooling, Hitchhiking</option>
+			</select><br><br>
 
-		<label for="point_a">Origin:</label>
-		<input type="text" name="point_a" id="point_a"><br><br>
+			<label for="point_a">Origin:</label>
+			<input type="text" name="point_a" id="point_a"><br><br>
 
-		<label for="point_b">Destination:</label>
-		<input type="text" name="point_b" id="point_b"><br><br>
+			<label for="point_b">Destination:</label>
+			<input type="text" name="point_b" id="point_b"><br><br>
 
-		<button type="button" onclick="calculatePoints()">Calculate Points</button>
-	</form>
+			<button type="button" onclick="calculatePoints()">Calculate Points</button>
+		</form>
 
-	<p>Points Earned: <span id="pointcalc"></span></p>
-	
-	<p>Distance: <span id="distance"></span></p>
-	<br>
-	<p><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
-	    Ridesharing, Carpooling, Hitchhiking: 2x
-	</p>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
-	<script>
-		function calculatePoints() {
-			var transportation = document.getElementById("transportation").value;
-			var pointA = document.getElementById("point_a").value;
-			var pointB = document.getElementById("point_b").value;
+		<p style="text-align:left;">Points Earned: <span id="pointcalc"></span></p>
+		
+		<p style="text-align:left;">Distance: <span id="distance"></span></p>
+		<br>
+		<p style="text-align:left;"><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
+		    Ridesharing, Carpooling, Hitchhiking: 2x
+		</p>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
+		<script>
+			function calculatePoints() {
+				var transportation = document.getElementById("transportation").value;
+				var pointA = document.getElementById("point_a").value;
+				var pointB = document.getElementById("point_b").value;
 
-			if (transportation === "" || pointA === "" || pointB === "") {
-				alert("Please fill in all fields before calculating points.");
-				return;
-			}
-
-			var service = new google.maps.DistanceMatrixService();
-			service.getDistanceMatrix({
-				origins: [pointA],
-				destinations: [pointB],
-				travelMode: google.maps.TravelMode.DRIVING,
-				unitSystem: google.maps.UnitSystem.IMPERIAL,
-				avoidHighways: false,
-				avoidTolls: false
-			}, function(response, status) {
-				if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-					var distance = response.rows[0].elements[0].distance.text;
-					var points = 0;
-					switch (transportation) {
-						case "active":
-							points = parseFloat(distance) * 10;
-							break;
-						case "public":
-							points = parseFloat(distance) * 5;
-							break;
-						case "shared":
-							points = parseFloat(distance) * 2;
-							break;
-					}
-					document.getElementById("pointcalc").innerHTML = points;
-					document.getElementById("distance").innerHTML = distance;
-				} else {
-					alert("Unable to find the distance between the two locations.");
-					document.getElementById("pointcalc").innerHTML = "";
-					document.getElementById("distance").innerHTML = "";
+				if (transportation === "" || pointA === "" || pointB === "") {
+					alert("Please fill in all fields before calculating points.");
+					return;
 				}
-			});
-		}
-	</script>
-</body>
+
+				var service = new google.maps.DistanceMatrixService();
+				service.getDistanceMatrix({
+					origins: [pointA],
+					destinations: [pointB],
+					travelMode: google.maps.TravelMode.DRIVING,
+					unitSystem: google.maps.UnitSystem.IMPERIAL,
+					avoidHighways: false,
+					avoidTolls: false
+				}, function(response, status) {
+					if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+						var distance = response.rows[0].elements[0].distance.text;
+						var points = 0;
+						switch (transportation) {
+							case "active":
+								points = parseFloat(distance) * 10;
+								break;
+							case "public":
+								points = parseFloat(distance) * 5;
+								break;
+							case "shared":
+								points = parseFloat(distance) * 2;
+								break;
+						}
+						document.getElementById("pointcalc").innerHTML = points;
+						document.getElementById("distance").innerHTML = distance;
+					} else {
+						alert("Unable to find the distance between the two locations.");
+						document.getElementById("pointcalc").innerHTML = "";
+						document.getElementById("distance").innerHTML = "";
+					}
+				});
+			}
+		</script>
+	</body>
 </html>
 
 {%endblock%}
