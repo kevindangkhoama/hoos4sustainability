@@ -7,11 +7,7 @@
     <meta charset="utf-8">
     <title>Ship Animation</title>
     <style>
-      body {
-        background-image: url("background.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
+    
       .ship {
         position: absolute;
         top: 50%;
@@ -32,8 +28,8 @@
     </style>
   </head>
   <body>
-    <img src="{% static 'hello/ship.png'%}" alt="Ship" class="ship">
-    <img src="{% static 'hello/treasure.png'%}" alt="Treasure" class="treasure">
+    <img src="{% static 'hello/ship.png'%}" alt="Ship" class="ship"/>
+    <img src="{% static 'hello/treasure.png'%}" alt="Treasure" class="treasure"/>
     <input type="number" min="0" max="100" placeholder="Enter miles">
     <script>
       const input = document.querySelector('input');
