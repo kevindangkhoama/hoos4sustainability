@@ -23,7 +23,7 @@ Access our submission [here](https://hoos4sustainability.herokuapp.com/hoos/). T
 <details>
 <summary>shared</summary>  
   
-Car Pool, Ride Share, Hitch Hike
+Carpooling, Ridesharing, Hitchhiking
 </details>
 <br>
 
