@@ -16,6 +16,10 @@ from hello.views.comment import CommentCreate
 from hello.views.home import home
 from hello.views.post import PostView, PostCreate, PostUpdate, PostDelete
 
+
+
+app_name = 'hello'
+
 # To add a new path, first import the app:
 # import blog
 #
