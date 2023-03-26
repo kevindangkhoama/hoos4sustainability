@@ -97,9 +97,15 @@ table, th, td {
       
       <!-- <p style="text-align:center;">Current Points: <span id="currentpt"></span></p>
       <br> -->
+
 <p style="text-align:center;">Distance: <span id="distance"></span></p>
+<!-- <label for="pointcalc">Points Earned:</label>
+      <input type="text" name="point_b" id="point_b" placeholder="Street Address and ZIP"><br><br>
+ -->
+
     <p style="text-align:center;">Points Earned: <span id="pointcalc"></span></p>
     <br>
+    <center><button type="button" onclick="addNumbers()">Total Points</button> </center><br>
 <p style="text-align:center;">New Total Points: <span id="newtotal"></span></p>
 <br>
 
@@ -180,7 +186,7 @@ border-radius: 10px;
 
 
       <script>
-        const input = document.querySelector('input');
+        const input = document.querySelector('currentpt');
         const ship = document.querySelector('.ship');
         let previousMiles = 0;
         const maxWidth = window.innerWidth - ship.offsetWidth;
@@ -235,14 +241,15 @@ border-radius: 10px;
         window.onload = () => {
           moveShip();
         };
-      </script>
+
+</script>
     </div>
   </body>
 </html>
 
-
-
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places">
+      
+    </script>
 		<script>
 			function calculatePoints() {
 				var transportation = document.getElementById("transportation").value;
@@ -295,6 +302,81 @@ border-radius: 10px;
                     file.write(newTotalString);
 				});
 			}
+      
+function addNumbers(points) {
+        // Get the values of the two input fields
+        var num1 = parseFloat(document.getElementById('currentpt').value);
+        var num2 = parseFloat(document.getElementById('pointcalc').innerText); // this is the NaN problem
+
+        // Check that the input values are actually numbers
+        if (isNaN(num1) || isNaN(num2)) {
+          document.getElementById("newtotal").innerHTML = "Please enter two numbers.";
+          // document.getElementById("newtotal").innerHTML = num2;
+          return;
+        }
+        //parseFloat(sum.value)
+        // document.getElementById("newtotal").innerHTML = num2;
+        // return;
+
+        // Add the two numbers together
+        var sum = num1 + num2;
+
+        // Display the result
+        document.getElementById("newtotal").innerHTML = sum;
+
+
+        const input = document.querySelector('currentpt');
+        const ship = document.querySelector('.ship');
+        let previousMiles = 0;
+        const maxWidth = window.innerWidth - ship.offsetWidth;
+
+        let previousDistance = 0;
+        const miles = parseInt(sum);
+
+        input.addEventListener('input', () => {
+          const miles = parseInt(input.value);
+          let moveDistance;
+          if (miles > previousMiles) {
+            const percent = ((miles - previousMiles) / 100) * 100;
+            moveDistance = (percent / 100) * maxWidth;
+          } else {
+            moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
+          }
+          moveDistance %= maxWidth;
+          if (moveDistance < 0) {
+            moveDistance += maxWidth;
+          }
+          const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
+          const duration = distanceDiff / maxWidth * 5;
+          ship.style.transitionDuration = `${duration}s`;
+          previousMiles = miles;
+          moveShip();
+        });
+
+        window.onload = () => {
+          moveShip();
+        };
+
+
+        // file.write('newtotal');
+        // const distanceDiff = Math.abs(sum - parseFloat(ship.style.left));
+        //   let duration = distanceDiff / maxWidth * 5;
+        //   // if (moveDistance < previousDistance) {
+        //   //   duration *= 2; // double duration for wrap-around effect
+        //   // }
+        //   ship.style.transitionDuration = `${duration}s`;
+        //   ship.style.left = `${moveDistance}px`;
+        //   previousDistance = moveDistance;
+        //   if (moveDistance === 0) {
+        //     previousDistance = maxWidth;
+        //   }
+
+        //   if (miles > 0 && miles%100 == 0) {
+        //     alert("Treasure reached!");
+        //   }
+        // return;
+      }
+
 		</script>
 	</body>
 </html>
