@@ -1,196 +1,81 @@
 {% extends 'hello/base.html' %}
 {% block content %}
 
-<style>
-form {
-  text-align: center;
-}
-</style>
-<center>
-<!-- <form action="/action_page.php"> -->
-	<!-- <form id="testing" > -->
-<!--   <label for="Start">Start:</label>
-<input type="text" id="Start" name="Start" class="points"><br><br> -->
-<!-- <label for="Destination">Destination:</label>
-<input type="text" id="Destination" name="Destination" class="points"><br><br> -->
-<label for="Miles">Miles:</label>
-  <input type="text" id="Miles" name="Miles" class="Miles" oninput="calculatePoints()"><br><br>
-  <label for="Transportation">Transportation:</label>
-  <select id="Transportation" name="Transportation" onchange="calculatePoints()">
-    <option value="active">Walking, Running, Biking</option>
-    <option value="public">Public Transport</option>
-    <option value="shared">Carpooling</option>
-  </select><br><br>
-  <p>Points Earned: <span id="pointcalc"></span></p>
-<!-- <br> -->
-<!-- <textarea id="freeform" name="freeform" rows="4" cols="50"> -->
-<!-- </textarea><br><br> -->
- <!--  <input type="submit" value="Submit" urls="blog:points">
+<!DOCTYPE html>
+<html>
+<body>
+	<h1>Record Journey</h1>
+	<form>
+		<label for="transportation">Select Transport:</label>
+		<select id="transportation" name="transportation">
+			<option value="" disabled selected>Select Transport</option>
+			<option value="public">Metro, Bus, Train</option>
+			<option value="active">Walking, Running, Biking</option>
+			<option value="shared">Ridesharing, Carpooling, Hitchhiking</option>
+		</select><br><br>
 
-</form> -->
+		<label for="point_a">Origin:</label>
+		<input type="text" name="point_a" id="point_a"><br><br>
 
-<!-- <h1>Feedback Form</h1>
-<p>Please fill out this form to help me improve My site.</p> -->
-<!-- <form id="feedback">
-  <p>
-    <label>Start:
-    <input name="name" type="text" size="20" /> <br> Destination:
-    <input name="email" type="dest" size="20" /> <br> Transportation:
-    <input name="transportation" type="ride" size="20" placeholder="active, public, shared" />
-  </label>
+		<label for="point_b">Destination:</label>
+		<input type="text" name="point_b" id="point_b"><br><br>
 
-    <p>
-      
-      <input type="submit" value="Submit" />
-</form>
+		<button type="button" onclick="calculatePoints()">Calculate Points</button>
+	</form>
 
+	<p>Points Earned: <span id="pointcalc"></span></p>
+	
+	<p>Distance: <span id="distance"></span></p>
+	<br>
+	<p><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
+	    Ridesharing, Carpooling, Hitchhiking: 2x
+	</p>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
+	<script>
+		function calculatePoints() {
+			var transportation = document.getElementById("transportation").value;
+			var pointA = document.getElementById("point_a").value;
+			var pointB = document.getElementById("point_b").value;
 
-<div id="res"></div> -->
+			if (transportation === "" || pointA === "" || pointB === "") {
+				alert("Please fill in all fields before calculating points.");
+				return;
+			}
 
-<script>
-function calculatePoints() {
-  let pts = {
-    active: 10,
-    public: 5,
-    shared: 2,
-  };
-  let miles = parseFloat(document.getElementById("Miles").value);
-  let transportation = document.getElementById("Transportation").value.toLowerCase();
-  let points = miles * pts[transportation];
-  document.getElementById("pointcalc").textContent = points;
-}
-function lengthConverter(valNum) {
-	let pts = {
-		active : 10,
-		public : 5,
-		shares : 2,
-	};
-	let pt_val = {}
-
-	pt_val.active = ($("#Miles").val() * pts.active )
-  $("#pointcalc").val(pt_val.active);
-  // document.getElementById("pointcalc").innerHTML = valNum;
-}
-
-    // function loginButtonClick() {
-    //     var username = document.forms.testing.Start.value;
-    //     // alert(username);
-    //     // print(username);
-    //     // System.out.println(username);
-    //     document.getElementById("Start").innerHTML = 5 + 6;
-    //     let print = console.log
-	// 	print('Hello, World!')
-    // }
-// document.getElementById("testing").addEventListener("submit", function(e) {
-//   e.preventDefault(); // stop submission
-//   const html = [...this.elements]
-    // .filter(ele => {
-    //   if (ele.type === "text" || ele.type==="text") return true;
-    //   if (ele.type === "text" && ele.checked) return true;
-    //   if (ele.type === "submit") return false;
-    // })
-//     .map(ele => {
-//       const start = ele.Start;
-//       const dest = ele.Destination;
-//       if (ele.classList.contains("points")) return `<tr class="points"><td>${ele.name}</td><td>&nbsp;</td></tr>`
-//       else return `<tr><td>${ele.name}</td><td>${ele.value}</td></tr>`
-//     }).join("");
-//   document.getElementById("res").innerHTML = `You answered: <br/><table id="answer">
-//    <tbody>${html}</tbody>
-//    </table>`;
-//    const like = document.querySelector("#answer .points");
-//    if (like) like.insertAdjacentHTML("beforebegin",`<tr><td colspan="2">Things you like:</td></tr>`)
-// })
-
-// document.getElementById("feedback").addEventListener("submit", function(e) {
-//   e.preventDefault(); // stop submission
-//   const html = [...this.elements]
-//     .filter(ele => {
-//       if (ele.type === "text" || ele.type==="email" || ele.type==="ride") return true;
-//       // if (ele.type === "checkbox" && ele.checked) return true;
-//       if (ele.type === "submit") return false;
-//     })
-//     .map(ele => {
-//       const name = ele.name
-//       const value = ele.value;
-//       return '<td>${ele.name}</td>';
-//       document.getElementById("res").innerHTML = `You answered: <br/><table id="answer"><tbody>${html}</tbody></table>`;
-//   //     if (ele.classList.contains("thingslike")) return `<tr class="thingslike"><td>${ele.name}</td><td>&nbsp;</td></tr>`
-//   //     else return `<tr><td>${ele.name}</td><td>${ele.value}</td></tr>`
-//   //   }).join("");
-//   // document.getElementById("res").innerHTML = `You answered: <br/><table id="answer">
-//   //  <tbody>${html}</tbody>
-//   //  </table>`;
-//   //  const like = document.querySelector("#answer .thingslike");
-//   //  if (like) like.insertAdjacentHTML("beforebegin",`<tr><td colspan="2">Things you like:</td></tr>`)
-// })
-
-    const { Client } = require('@googlemaps/google-maps-services-js');
-
-const client = new Client({});
-
-function distance(point_a, point_b) {
-  return client
-    .directions({
-      params: {
-        origin: point_a,
-        destination: point_b,
-        key: 'AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk',
-      },
-    })
-    .then(response => {
-      const distance = response.data.routes[0].legs[0].distance.text;
-      return distance;
-    })
-    .catch(error => {
-      console.log(error.response.data.error_message);
-    });
-}
-
-function points(transportation, point_a, point_b) {
-  // 10x active transportation (biking, walking, skating)
-  // 5x public transportation (bus, train, metro)
-  // 2x Shared transportation (car-pool, ridesharing, hitchhiking)
-
-  return distance(point_a, point_b).then(distance => {
-    const pointsEarned = parseInt(distance.replace(' mi', ''));
-    switch (transportation) {
-      case 'active':
-        return pointsEarned * 10;
-      case 'public':
-        return pointsEarned * 5;
-      case 'shared':
-        return pointsEarned * 2;
-      default:
-        return 0;
-    }
-  });
-}
-
-if (require.main === module) {
-  const readline = require('readline');
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  rl.question('Form of Transportation: ', transportation => {
-    rl.question('Origin: ', point_a => {
-      rl.question('Destination: ', point_b => {
-        points(transportation, point_a, point_b).then(points => {
-          console.log(points);
-          rl.close();
-        });
-      });
-    });
-  });
-}
-
-</script>
-
-<!-- {%if Start%}
-hi
-{%endif%} -->
-
+			var service = new google.maps.DistanceMatrixService();
+			service.getDistanceMatrix({
+				origins: [pointA],
+				destinations: [pointB],
+				travelMode: google.maps.TravelMode.DRIVING,
+				unitSystem: google.maps.UnitSystem.IMPERIAL,
+				avoidHighways: false,
+				avoidTolls: false
+			}, function(response, status) {
+				if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+					var distance = response.rows[0].elements[0].distance.text;
+					var points = 0;
+					switch (transportation) {
+						case "active":
+							points = parseFloat(distance) * 10;
+							break;
+						case "public":
+							points = parseFloat(distance) * 5;
+							break;
+						case "shared":
+							points = parseFloat(distance) * 2;
+							break;
+					}
+					document.getElementById("pointcalc").innerHTML = points;
+					document.getElementById("distance").innerHTML = distance;
+				} else {
+					alert("Unable to find the distance between the two locations.");
+					document.getElementById("pointcalc").innerHTML = "";
+					document.getElementById("distance").innerHTML = "";
+				}
+			});
+		}
+	</script>
+</body>
+</html>
 
 {%endblock%}
