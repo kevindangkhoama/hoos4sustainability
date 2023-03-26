@@ -14,10 +14,10 @@ form {
 <!-- <label for="Destination">Destination:</label>
 <input type="text" id="Destination" name="Destination" class="points"><br><br> -->
 <label for="Miles">Miles:</label>
-<input type="text" id="Miles" name="Miles" class="Miles" oninput="lengthConverter(this.value)" onchange="lengthConverter(this.value)"><br><br>
-<label for="Transportation">Transportation:</label>
-<input type="text" id="Transportation" name="Transportation" placeholder="active, public, shared" class="points"><br><br>
-  <p>Points Earned: <span id="pointcalc"></span></p></center>
+  <input type="text" id="Miles" name="Miles" class="Miles" oninput="calculatePoints()"><br><br>
+  <label for="Transportation">Transportation:</label>
+  <input type="text" id="Transportation" name="Transportation" placeholder="active, public, shared" oninput="calculatePoints()"><br><br>
+  <p>Points Earned: <span id="pointcalc"></span></p>
 <!-- <br> -->
 <!-- <textarea id="freeform" name="freeform" rows="4" cols="50"> -->
 <!-- </textarea><br><br> -->
@@ -44,7 +44,17 @@ form {
 <div id="res"></div> -->
 
 <script>
-
+function calculatePoints() {
+  let pts = {
+    active: 10,
+    public: 5,
+    shared: 2,
+  };
+  let miles = parseFloat(document.getElementById("Miles").value);
+  let transportation = document.getElementById("Transportation").value.toLowerCase();
+  let points = miles * pts[transportation];
+  document.getElementById("pointcalc").textContent = points;
+}
 function lengthConverter(valNum) {
 	let pts = {
 		active : 10,
