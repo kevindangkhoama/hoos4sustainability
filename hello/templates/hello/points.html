@@ -2,213 +2,63 @@
 {% block content %}
 {% load static %}
 
-<!DOCTYPE html>
 <html>
-
-
-<style>
-table, th, td {
-  border:1px solid light-blue;
-}
-</style>
-
-
-
-<body>
-
-<center><table style="width:90%">
-  <tr>
-    <th style="width:30%">
-
-      <p style="text-align:center;"><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
-        Ridesharing, Carpooling, Hitchhiking: 2x
-    </p>
-      
-    </th>
-    <th style="width:40%">
-      
-<center>
-
-  <body style="text-align:center;">
-    <h1>Record Journey</h1>
-    <label for="currentpt">Current Points:</label>
-      <input type="text" name="currentpt" id="currenpt"><br><br>
-
-    <form>
-
-      <label for="transportation">Select Transport:</label>
-      <select id="transportation" name="transportation">
-        <option value="" disabled selected>Select Transport</option>
-        <option value="public">Metro, Bus, Train</option>
-        <option value="active">Walking, Running, Biking</option>
-        <option value="shared">Ridesharing, Carpooling, Hitchhiking</option>
-      </select><br><br>
-
-      <label for="point_a">Origin:</label>
-      <input type="text" name="point_a" id="point_a"placeholder="Street Address and ZIP"><br><br>
-
-      <label for="point_b">Destination:</label>
-      <input type="text" name="point_b" id="point_b" placeholder="Street Address and ZIP"><br><br>
-
-      <button type="button" onclick="calculatePoints()">Calculate Points</button>
-    </form> </center> <br>
-
-
-
-
-
-    </th>
-    <th style="width:30%">
-      
-      <!-- <p style="text-align:center;">Current Points: <span id="currentpt"></span></p>
-      <br> -->
-<p style="text-align:center;">Distance: <span id="distance"></span></p>
-    <p style="text-align:center;">Points Earned: <span id="pointcalc"></span></p>
-    <br>
-<p style="text-align:center;">New Total Points: <span id="newtotal"></span></p>
-<br>
-<u><b><p style="text-align:center;">LEVEL: <span id="level"></span></p></b></u>
-
-    </th>
-  </tr>
-  
-</table></center>
-
-</body>
-
-
-
-
-
-
 	<head>
 		<meta charset="UTF-8">
-    
-		
-
-
-		<!-- <br> -->
-		<!-- <p style="text-align:center;"><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
-		    Ridesharing, Carpooling, Hitchhiking: 2x
-		</p> -->
-
-
-    <meta charset="utf-8">
-    <!-- <h2>Ship Animation</h2> -->
-    <style>
-    
-      .ship {
-        position: absolute;
-        top: 73%;
-        left: 0;
-        transform: translate(0, -50%);
-        width: 300px;
-        height: auto;
-        transition: left 1s ease;
-      }
-      .treasure {
-        position: absolute;
-        top: 73%;
-        right: 30px;
-        transform: translate(0, -50%);
-        width: 200px;
-        height: auto;
-      }
-      #td-navbar {
-    background-color: #E44B8D !important;
-  }
-
-  .box-blue {
-    margin:25px;
-    overflow:hidden;
-/*    padding:20px;*/
-    background-color:#e3f2fd;
-    border:1px solid #afcde3;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 10px;
-border-radius: 10px;
- height: 300px;
- object-fit: fill;
+		<title>Record Journey</title>
+	</head>
+	<body>
+  <h1>Insert Points.txt</h1>
+  <input type="file" id="file-input">
+  <button onclick="parseTotalPoints()">Upload</button>
+  <p id="total-points"></p>
+  <script>
+    function parseTotalPoints() {
+  // Get the selected file from the input element
+  let fileInput = document.getElementById("file-input");
+  let file = fileInput.files[0];
+  // Create a file reader object
+  let reader = new FileReader();
+  // Set up the onload function to read the contents of the file
+  reader.onload = function(event) {
+    let contents = event.target.result;
+    // Parse the contents of the file to extract the total points
+    let totalPointsMatch = contents.match(/^total points = (\d+)$/i);
+    if (totalPointsMatch) {
+      let totalPoints = parseInt(totalPointsMatch[1]);
+      // Store the total points in a variable and display it on the page
+      let totalPointsElement = document.getElementById("total-points");
+      totalPointsElement.textContent = "Total points: " + totalPoints;
+    } else {
+      let totalPointsElement = document.getElementById("total-points");
+      totalPointsElement.textContent = "Invalid file format";
+    }
+  };
+  // Read the file as text
+  reader.readAsText(file);
 }
+  </script>
+</body>
+	<body style="text-align:center;">
+		<h1>Record Journey</h1>
+		<form>
+			<label for="transportation">Select Transport:</label>
+			<select id="transportation" name="transportation">
+				<option value="" disabled selected>Select Transport</option>
+				<option value="public">Metro, Bus, Train</option>
+				<option value="active">Walking, Running, Biking</option>
+				<option value="shared">Ridesharing, Carpooling, Hitchhiking</option>
+			</select><br><br>
 
+			<label for="point_a">Origin:</label>
+			<input type="text" name="point_a" id="point_a"><br><br>
 
-    </style>
-<div class = "wrapper"><div class="box-blue"> <img src = "{%static 'hello/water.png' %}" alt = "water"> </div>
-<body>
-    <img src="{% static 'hello/ship.png'%}" alt="Ship" class="ship"/>
-    <img src="{% static 'hello/treasure.png'%}" alt="Treasure" class="treasure"/>
-    <!-- <input type="number" min="0" max="100" placeholder="Enter miles"> -->
-    
-    <!-- <div class="footer"> -->
+			<label for="point_b">Destination:</label>
+			<input type="text" name="point_b" id="point_b"><br><br>
 
-</center></div>
-
-
-      <script>
-        const input = document.querySelector('input');
-        const ship = document.querySelector('.ship');
-        let previousMiles = 0;
-        const maxWidth = window.innerWidth - ship.offsetWidth;
-
-        let previousDistance = 0;
-
-        function moveShip() {
-          const miles = parseInt(input.value);
-          const percent = (miles / 100) * 100;
-          let moveDistance = percent / 100 * maxWidth;
-          moveDistance %= maxWidth;
-          if (moveDistance < 0) {
-            moveDistance += maxWidth;
-          }
-          const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
-          let duration = distanceDiff / maxWidth * 5;
-          if (moveDistance < previousDistance) {
-            duration *= 2; // double duration for wrap-around effect
-          }
-          ship.style.transitionDuration = `${duration}s`;
-          ship.style.left = `${moveDistance}px`;
-          previousDistance = moveDistance;
-          if (moveDistance === 0) {
-            previousDistance = maxWidth;
-          }
-
-          if (miles > 0 && miles%100 == 0) {
-            alert("Treasure reached!");
-          }
-        }
-
-        // input.addEventListener('input', () => {
-        //   const miles = parseInt(input.value);
-        //   let moveDistance;
-        //   if (miles > previousMiles) {
-        //     const percent = ((miles - previousMiles) / 100) * 100;
-        //     moveDistance = (percent / 100) * maxWidth;
-        //   } else {
-        //     moveDistance = parseFloat(ship.style.left) - ((previousMiles - miles) / 100) * maxWidth;
-        //   }
-        //   moveDistance %= maxWidth;
-        //   if (moveDistance < 0) {
-        //     moveDistance += maxWidth;
-        //   }
-        //   const distanceDiff = Math.abs(moveDistance - parseFloat(ship.style.left));
-        //   const duration = distanceDiff / maxWidth * 5;
-        //   ship.style.transitionDuration = `${duration}s`;
-        //   previousMiles = miles;
-        //   moveShip();
-        // });
-
-        window.onload = () => {
-          moveShip();
-        };
-      </script>
-    </div>
-  </body>
-</html>
-
-
-
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
+			<button type="button" onclick="calculatePoints()">Calculate Points</button>
+		</form>
+		
 		<script>
 			function calculatePoints() {
 				var transportation = document.getElementById("transportation").value;
@@ -219,6 +69,8 @@ border-radius: 10px;
 					alert("Please fill in all fields before calculating points.");
 					return;
 				}
+				
+				
 
 				var service = new google.maps.DistanceMatrixService();
 				service.getDistanceMatrix({
@@ -250,9 +102,30 @@ border-radius: 10px;
 						document.getElementById("pointcalc").innerHTML = "";
 						document.getElementById("distance").innerHTML = "";
 					}
+					let totalPoints = parseInt(document.getElementById("total-points").textContent.match(/\d+/)[0]);
+                    let pointcalc = parseFloat(document.getElementById("pointcalc").textContent);
+                    let newtotal = totalPoints + pointcalc;
+                    document.getElementById("newtotal").textContent = newtotal;
+                    // create a string with the new total value
+                    var newTotalString = "New Total: " + newtotal;
+
+                    // write the new total string to the file
+                    file.write(newTotalString);
+
 				});
 			}
 		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk&libraries=places"></script>
+		
+		<p style="text-align:center;">Points Earned: <span id="pointcalc"></span></p>
+		<p style="text-align:center;">Distance: <span id="distance"></p>
+		<p style="text-align:center;">New Total: <span id="newtotal"></p>
+		<p style="text-align:left;"><u>Multipliers:</u> <br>Metro, Bus, Train: 5x <br> Walking, Running, Biking: 10x <br>
+		    Ridesharing, Carpooling, Hitchhiking: 2x
+		</p>
+		
+	
 	</body>
 </html>
 
