@@ -16,7 +16,11 @@ form {
 <label for="Miles">Miles:</label>
   <input type="text" id="Miles" name="Miles" class="Miles" oninput="calculatePoints()"><br><br>
   <label for="Transportation">Transportation:</label>
-  <input type="text" id="Transportation" name="Transportation" placeholder="active, public, shared" oninput="calculatePoints()"><br><br>
+  <select id="Transportation" name="Transportation" onchange="calculatePoints()">
+    <option value="active">Walking, Running, Biking</option>
+    <option value="public">Public Transport</option>
+    <option value="shared">Carpooling</option>
+  </select><br><br>
   <p>Points Earned: <span id="pointcalc"></span></p>
 <!-- <br> -->
 <!-- <textarea id="freeform" name="freeform" rows="4" cols="50"> -->
