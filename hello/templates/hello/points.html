@@ -1,0 +1,182 @@
+{% extends 'hello/base.html' %}
+{% block content %}
+
+<style>
+form {
+  text-align: center;
+}
+</style>
+<center>
+<!-- <form action="/action_page.php"> -->
+	<!-- <form id="testing" > -->
+<!--   <label for="Start">Start:</label>
+<input type="text" id="Start" name="Start" class="points"><br><br> -->
+<!-- <label for="Destination">Destination:</label>
+<input type="text" id="Destination" name="Destination" class="points"><br><br> -->
+<label for="Miles">Miles:</label>
+<input type="text" id="Miles" name="Miles" class="Miles" oninput="lengthConverter(this.value)" onchange="lengthConverter(this.value)"><br><br>
+<label for="Transportation">Transportation:</label>
+<input type="text" id="Transportation" name="Transportation" placeholder="active, public, shared" class="points"><br><br>
+  <p>Points Earned: <span id="pointcalc"></span></p></center>
+<!-- <br> -->
+<!-- <textarea id="freeform" name="freeform" rows="4" cols="50"> -->
+<!-- </textarea><br><br> -->
+ <!--  <input type="submit" value="Submit" urls="blog:points">
+
+</form> -->
+
+<!-- <h1>Feedback Form</h1>
+<p>Please fill out this form to help me improve My site.</p> -->
+<!-- <form id="feedback">
+  <p>
+    <label>Start:
+    <input name="name" type="text" size="20" /> <br> Destination:
+    <input name="email" type="dest" size="20" /> <br> Transportation:
+    <input name="transportation" type="ride" size="20" placeholder="active, public, shared" />
+  </label>
+
+    <p>
+      
+      <input type="submit" value="Submit" />
+</form>
+
+
+<div id="res"></div> -->
+
+<script>
+
+function lengthConverter(valNum) {
+	let pts = {
+		active : 10,
+		public : 5,
+		shares : 2,
+	};
+	let pt_val = {}
+
+	pt_val.active = ($("#Miles").val() * pts.active )
+  $("#pointcalc").val(pt_val.active);
+  // document.getElementById("pointcalc").innerHTML = valNum;
+}
+
+    // function loginButtonClick() {
+    //     var username = document.forms.testing.Start.value;
+    //     // alert(username);
+    //     // print(username);
+    //     // System.out.println(username);
+    //     document.getElementById("Start").innerHTML = 5 + 6;
+    //     let print = console.log
+	// 	print('Hello, World!')
+    // }
+// document.getElementById("testing").addEventListener("submit", function(e) {
+//   e.preventDefault(); // stop submission
+//   const html = [...this.elements]
+    // .filter(ele => {
+    //   if (ele.type === "text" || ele.type==="text") return true;
+    //   if (ele.type === "text" && ele.checked) return true;
+    //   if (ele.type === "submit") return false;
+    // })
+//     .map(ele => {
+//       const start = ele.Start;
+//       const dest = ele.Destination;
+//       if (ele.classList.contains("points")) return `<tr class="points"><td>${ele.name}</td><td>&nbsp;</td></tr>`
+//       else return `<tr><td>${ele.name}</td><td>${ele.value}</td></tr>`
+//     }).join("");
+//   document.getElementById("res").innerHTML = `You answered: <br/><table id="answer">
+//    <tbody>${html}</tbody>
+//    </table>`;
+//    const like = document.querySelector("#answer .points");
+//    if (like) like.insertAdjacentHTML("beforebegin",`<tr><td colspan="2">Things you like:</td></tr>`)
+// })
+
+// document.getElementById("feedback").addEventListener("submit", function(e) {
+//   e.preventDefault(); // stop submission
+//   const html = [...this.elements]
+//     .filter(ele => {
+//       if (ele.type === "text" || ele.type==="email" || ele.type==="ride") return true;
+//       // if (ele.type === "checkbox" && ele.checked) return true;
+//       if (ele.type === "submit") return false;
+//     })
+//     .map(ele => {
+//       const name = ele.name
+//       const value = ele.value;
+//       return '<td>${ele.name}</td>';
+//       document.getElementById("res").innerHTML = `You answered: <br/><table id="answer"><tbody>${html}</tbody></table>`;
+//   //     if (ele.classList.contains("thingslike")) return `<tr class="thingslike"><td>${ele.name}</td><td>&nbsp;</td></tr>`
+//   //     else return `<tr><td>${ele.name}</td><td>${ele.value}</td></tr>`
+//   //   }).join("");
+//   // document.getElementById("res").innerHTML = `You answered: <br/><table id="answer">
+//   //  <tbody>${html}</tbody>
+//   //  </table>`;
+//   //  const like = document.querySelector("#answer .thingslike");
+//   //  if (like) like.insertAdjacentHTML("beforebegin",`<tr><td colspan="2">Things you like:</td></tr>`)
+// })
+
+    const { Client } = require('@googlemaps/google-maps-services-js');
+
+const client = new Client({});
+
+function distance(point_a, point_b) {
+  return client
+    .directions({
+      params: {
+        origin: point_a,
+        destination: point_b,
+        key: 'AIzaSyB039a5JHinvotsgxrUB0_9Vs0GnbC8ttk',
+      },
+    })
+    .then(response => {
+      const distance = response.data.routes[0].legs[0].distance.text;
+      return distance;
+    })
+    .catch(error => {
+      console.log(error.response.data.error_message);
+    });
+}
+
+function points(transportation, point_a, point_b) {
+  // 10x active transportation (biking, walking, skating)
+  // 5x public transportation (bus, train, metro)
+  // 2x Shared transportation (car-pool, ridesharing, hitchhiking)
+
+  return distance(point_a, point_b).then(distance => {
+    const pointsEarned = parseInt(distance.replace(' mi', ''));
+    switch (transportation) {
+      case 'active':
+        return pointsEarned * 10;
+      case 'public':
+        return pointsEarned * 5;
+      case 'shared':
+        return pointsEarned * 2;
+      default:
+        return 0;
+    }
+  });
+}
+
+if (require.main === module) {
+  const readline = require('readline');
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  rl.question('Form of Transportation: ', transportation => {
+    rl.question('Origin: ', point_a => {
+      rl.question('Destination: ', point_b => {
+        points(transportation, point_a, point_b).then(points => {
+          console.log(points);
+          rl.close();
+        });
+      });
+    });
+  });
+}
+
+</script>
+
+<!-- {%if Start%}
+hi
+{%endif%} -->
+
+
+{%endblock%}
