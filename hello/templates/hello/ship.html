@@ -1,5 +1,6 @@
 {% extends 'hello/base.html' %}
 {% block content %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -27,10 +28,16 @@
       }
     </style>
   </head>
+
   <body>
     <img src="{% static 'hello/ship.png'%}" alt="Ship" class="ship"/>
     <img src="{% static 'hello/treasure.png'%}" alt="Treasure" class="treasure"/>
     <input type="number" min="0" max="100" placeholder="Enter miles">
+</body>
+</html>
+{%endblock content%}
+
+
     <script>
       const input = document.querySelector('input');
       const ship = document.querySelector('.ship');
@@ -88,7 +95,8 @@
         moveShip();
       };
     </script>
-  </body>
-</html>
+  
 
-{%endblock%}
+
+
+
