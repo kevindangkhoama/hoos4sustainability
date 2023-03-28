@@ -6,7 +6,7 @@ Group: Brandon Tran, Tiffany Bui, and Kevin Ma
 > Prompt: What initially small changes could contribute to aiding global sustainability efforts when gradually implemented by communities at-large?
 
 ## Usage
-Access our submission [here](https://hoos4sustainability.herokuapp.com) or [here](hoos4sustainability.tech) and DevPost [here](https://devpost.com/software/hoos4sustainability). To track your distance traveled via eco-friendly modes of transportation. Enter your origin and destination, followed by the category of transportation. The three categories are below:
+Access our submission [here](https://hoos4sustainability.herokuapp.com) or [here](https://www.hoos4sustainability.tech/) and DevPost [here](https://devpost.com/software/hoos4sustainability). To track your distance traveled via eco-friendly modes of transportation. Enter your origin and destination, followed by the category of transportation. The three categories are below:
 
 <details>
 <summary>active</summary>  
